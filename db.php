@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/credentials.php';
 
 class Db{
 	public $query;
