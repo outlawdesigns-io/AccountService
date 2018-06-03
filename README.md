@@ -5,3 +5,5 @@
  And to edit /etc/apache2/apache2.conf "AllowOverride All" for webroot
  
  Rename htaccess to .htaccess
+ 
+ Change credentials in credentials.php
