@@ -11,7 +11,7 @@ class SecureEndPoint extends API{
 
     public function __construct($request,$origin){
         parent::__construct($request);
-        if(isset($this->headers['request_token']) && $this->endpoint == "auth"){
+        if(isset($this->headers['request_token']) && $this->endpoint == "authenticate"){
             $this->processTokenRequest();
         }elseif(!isset($this->headers['auth_token'])){
             throw new Exception('Access Denied. Token not present.');
