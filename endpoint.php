@@ -16,6 +16,13 @@ class EndPoint extends SecureEndPoint{
     protected function authenticate(){
         return $this->tokenData;
     }
+    protected function verify(){
+        $data = GOZER::verifyToken($this->headers['auth_token']);
+        if(!$data){
+            throw new Exception('Invalid Token');
+        }
+        return $data;
+    }
     protected function user(){
         $data = null;
         if(!isset($this->verb) && !isset($this->args[0]) && $this->method == 'POST'){ //create
