@@ -40,7 +40,9 @@ class SecureEndPoint extends API{
                 }elseif($user->lock_out){
                     throw new Exception("Account Locked");
                 }else{
-                    $user->createToken();
+		    if($user->isTokenExpired()){
+		        $user->createToken();
+		    }
                     $this->tokenData = array("token"=>$user->auth_token,"secret"=>$gozer->generateSecret());
                 }
             }catch(Exception $e){
