@@ -71,6 +71,9 @@ abstract class Record implements RecordBehavior{
             if($key == 'created_date'){
                 $upData[$key] = date('Y-m-d H:i:s');
             }
+            if($key == 'dob'){
+                $upData[$key] = date('Y-m-d',strtotime($this->$key));
+            }
         }
         unset($upData['UID']);
         $results = $GLOBALS['db']
