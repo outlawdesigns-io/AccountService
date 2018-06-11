@@ -13,6 +13,7 @@ abstract class API{
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: *");
+        header("Access-Control-Allow-Headers: *");
         header("Content-Type: application/json");
         $this->headers = getallheaders();
         $this->args = explode('/', rtrim($request,'/'));
@@ -32,6 +33,8 @@ abstract class API{
         }
         switch ($this->method){
             case "DELETE":
+                break;
+            case "OPTIONS":
                 break;
             case "POST":
                 if(preg_match("/application\/json/",$this->headers['Content-Type'])){
