@@ -107,6 +107,9 @@ class Db{
                 $exceptionStr = "Query Failed: " . mysqli_error($this->link);
                 throw new Exception($exceptionStr);
             }
+	    if(!mysqli_close($this->link)){
+		throw new Exception(mysqli_error($this->link));
+	    }	
             return true;
 	}
         
