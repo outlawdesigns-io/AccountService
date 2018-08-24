@@ -128,6 +128,9 @@ class Db{
             if (!$results){
                 throw new Exception(mysqli_error($this->link));
             }
+	    if (!mysqli_close($this->link)){
+		throw new Exception(mysqli_error($this->link));    
+	    }	
             else{
                 switch ($structure){
                     case "object":
