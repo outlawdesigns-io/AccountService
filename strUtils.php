@@ -2,7 +2,7 @@
 
 class StrUtilities{
 
-    const RANDOMWORDAPI = 'http://setgetgo.com/randomword/get.php';
+    const RANDOMWORDAPI = 'http://api.outlawdesigns.io:9600';
 
     public function __construct()
     {
