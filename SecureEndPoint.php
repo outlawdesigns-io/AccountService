@@ -40,10 +40,14 @@ class SecureEndPoint extends API{
                 }elseif($user->lock_out){
                     throw new Exception("Account Locked");
                 }else{
-		    if($user->isTokenExpired()){
-		        $user->createToken();
-		    }
-                    $this->tokenData = array("token"=>$user->auth_token,"secret"=>$gozer->generateSecret());
+                  if(!Gozer::isLocalRequest($_SERVER['REMOTE_ADDR'])){
+                    $user->ip_address = $_SERVER['REMOTE_ADDR'];
+                    $user->updateLocation();
+                  }
+                  if($user->isTokenExpired()){
+                    $user->createToken();
+                  }
+                  $this->tokenData = array("token"=>$user->auth_token,"secret"=>$gozer->generateSecret());
                 }
             }catch(Exception $e){
                 $str = $e->getMessage();
