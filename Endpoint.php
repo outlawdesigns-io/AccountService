@@ -65,7 +65,7 @@ class EndPoint extends Api{
         return $user;
     }
     protected function authenticate(){
-        return $this->tokenData;
+        return $this->_tokenData;
     }
     protected function verify(){
       try{
