@@ -23,6 +23,9 @@ class Gozer{
         return json_decode(file_get_contents(self::IPAPI . $ip));
     }
     public static function isLocalRequest($remoteIp){
+        if(!isset($_SERVER['SERVER_ADDR'])){
+          throw new \Exception('Local IP Not Set');
+        }
         $localIp = $_SERVER['SERVER_ADDR'];
         if($remoteIp == self::LOOPBACK){
             return true;
