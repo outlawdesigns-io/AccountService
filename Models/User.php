@@ -116,8 +116,8 @@ class User extends Record{
     }
     public static function verifyUsername($username){
         $results = $GLOBALS['db']
-            ->database(self::USERS)
-            ->table(self::USERS)
+            ->database(self::DB)
+            ->table(self::TABLE)
             ->select(self::PRIMARYKEY)
             ->where("username","=","'" . $username . "'")
             ->get();
