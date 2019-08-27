@@ -51,7 +51,7 @@ class EndPoint extends Api{
               if($user->isTokenExpired()){
                 $user->createToken();
               }
-              $this->_tokenData = array("token"=>$user->auth_token,"secret"=>$gozer->generateSecret());
+              $this->_tokenData = array("token"=>$user->auth_token,"secret"=>Gozer::generateSecret());
             }
         }catch(\Exception $e){
             throw new \Exception($e->getMessage());
