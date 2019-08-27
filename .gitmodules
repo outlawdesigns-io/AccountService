@@ -1,0 +1,6 @@
+[submodule "Libs/Record"]
+	path = Libs/Record
+	url = https://github.com/outlawdesigns-io/Record
+[submodule "Libs/Api"]
+	path = Libs/Api
+	url = https://github.com/outlawdesigns-io/Api
