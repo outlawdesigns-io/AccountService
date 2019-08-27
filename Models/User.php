@@ -13,7 +13,8 @@ class User extends Record{
     const TOKENLIFE = '4 hours';
     const LOCKOUT_ATTMPTS = '5';
     const DEF_LOCKOUT = 'next friday';
-
+    
+    public $UID;
     public $username;
     public $password;
     public $auth_token;
