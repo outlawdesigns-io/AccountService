@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/Libs/strUtils.php';
+require_once __DIR__ . '/Libs/StrUtils.php';
 require_once __DIR__ . '/Models/User.php';
 
 
