@@ -44,10 +44,9 @@ class EndPoint extends Api{
             }elseif($user->lock_out){
               throw new \Exception(self::$_authErrors['accountLocked']);
             }else{
-              if(!Gozer::isLocalRequest($_SERVER['REMOTE_ADDR'])){
-                $user->ip_address = $_SERVER['REMOTE_ADDR'];
-                $user->updateLocation();
-              }
+              // if(!Gozer::isLocalRequest($_SERVER['REMOTE_ADDR'])){}
+              $user->ip_address = $_SERVER['REMOTE_ADDR'];
+              $user->updateLocation();
               if($user->isTokenExpired()){
                 $user->createToken();
               }

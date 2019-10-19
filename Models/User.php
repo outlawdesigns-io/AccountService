@@ -13,7 +13,7 @@ class User extends Record{
     const TOKENLIFE = '4 hours';
     const LOCKOUT_ATTMPTS = '5';
     const DEF_LOCKOUT = 'next friday';
-    
+
     public $UID;
     public $username;
     public $password;
@@ -85,14 +85,16 @@ class User extends Record{
         return $this;
     }
     public function updateLocation(){
-        $ipInfo = Gozer::getIpData($this->ip_address);
-        $this->lon = $ipInfo->lon;
-        $this->lat = $ipInfo->lat;
         $location = new UserLocation();
         $location->user = $this->username;
         $location->ip = $this->ip_address;
-        $location->lat = $this->lat;
-        $location->lon = $this->lon;
+        if(!Gozer::isLocalRequest($_SERVER['REMOTE_ADDR'])){
+            $ipInfo = Gozer::getIpData($this->ip_address);
+            $this->lon = $ipInfo->lon;
+            $this->lat = $ipInfo->lat;
+            $location->lat = $this->lat;
+            $location->lon = $this->lon;  
+        }
         $location->create();
         return $this;
     }
