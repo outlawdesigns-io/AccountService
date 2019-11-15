@@ -6,6 +6,7 @@ require_once __DIR__ . '/Models/User.php';
 class Gozer{
 
     const LOOPBACK = '127.0.0.1';
+    const DOCKER = '172.17.0.1';
     const IPAPI = 'http://ip-api.com/json/';
 
     public function __construct()
@@ -29,6 +30,9 @@ class Gozer{
         $localIp = $_SERVER['SERVER_ADDR'];
         if($remoteIp == self::LOOPBACK){
             return true;
+        }
+        if($remoteIp == self::DOCKER){
+          return true;
         }
         $localPieces = explode('.',$localIp);
         $remotePieces = explode('.',$remoteIp);
