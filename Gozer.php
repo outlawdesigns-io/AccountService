@@ -28,11 +28,8 @@ class Gozer{
           throw new \Exception('Local IP Not Set');
         }
         $localIp = $_SERVER['SERVER_ADDR'];
-        if($remoteIp == self::LOOPBACK){
+        if($remoteIp == self::LOOPBACK || $remoteIp == self::DOCKER){
             return true;
-        }
-        if($remoteIp == self::DOCKER){
-          return true;
         }
         $localPieces = explode('.',$localIp);
         $remotePieces = explode('.',$remoteIp);

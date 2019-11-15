@@ -16,7 +16,9 @@ class EndPoint extends Api{
         'badToken'=>'Access Denied. Invalid Token',
         'noPassword'=>'Missing credentials',
         'accountLocked'=>'Account Locked',
-        'badCreds'=>'Invalid Credentials. Event Logged'
+        'badCreds'=>'Invalid Credentials. Event Logged',
+        'badMethod'=>'Request Method not supported for this endpoint',
+        'badReq'=>'Malformed Request'
     );
     protected $_tokenData = array();
 
@@ -82,7 +84,7 @@ class EndPoint extends Api{
             $data = new User();
             $data->setFields($this->request)->create();
         }elseif(!isset($this->verb) && !isset($this->args[0]) && $this->method == 'GET'){ //get all
-
+            $data = User::getAll(User::DB,User::TABLE,User::PRIMARYKEY);
         }elseif(!isset($this->verb) &&(int)$this->args[0] && $this->method == 'GET'){ //get by id
             $data = new User($this->args[0]);
         }elseif((int)$this->args[0] && $this->method == 'PUT'){ //update by id
@@ -91,26 +93,24 @@ class EndPoint extends Api{
         }elseif(isset($this->verb)){
             $data = $this->_parseVerb();
         }else{
-            throw new \Exception('Malformed Request');
+            throw new \Exception(self::$_authErrors['badReq']);
         }
         return $data;
     }
     protected function location(){
         $data = null;
         if(!isset($this->verb) && !isset($this->args[0]) && $this->method == 'POST'){ //create
-            $data = new UserLocation();
-            $data->setFields($this->request)->create();
+            throw new \Exception(self::$_authErrors['badMethod']);
         }elseif(!isset($this->verb) && !isset($this->args[0]) && $this->method == 'GET'){ //get all
-
+            $data = UserLocation::getAll(UserLocation::DB,UserLocation::TABLE,UserLocation::PRIMARYKEY);
         }elseif(!isset($this->verb) &&(int)$this->args[0] && $this->method == 'GET'){ //get by id
             $data = new UserLocation($this->args[0]);
         }elseif((int)$this->args[0] && $this->method == 'PUT'){ //update by id
-            $data = new UserLocation($this->args[0]);
-            $data->setFields($this->file)->update();
+            throw new \Exception(self::$_authErrors['badMethod']);
         }elseif(isset($this->verb)){
             $data = $this->_parseVerb();
         }else{
-            throw new \Exception('Malformed Request');
+            throw new \Exception(self::$_authErrors['badReq']);
         }
         return $data;
     }
