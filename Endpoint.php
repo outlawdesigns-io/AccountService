@@ -62,7 +62,7 @@ class EndPoint extends Api{
         if(!$user = User::verifyToken($this->headers[self::TOKN_HDR])){
           throw new \Exception(self::$_authErrors['badToken']);
         }
-        if($user->ip_address != $_SERVER['REMOTE_ADDR']){
+        if($user->ip_address != $_SERVER['REMOTE_ADDR'] && $_SERVER['REMOTE_ADDR'] != Gozer::DOCKER){
           $user->ip_address = $_SERVER['REMOTE_ADDR'];
           $user->updateLocation();
         }
