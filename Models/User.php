@@ -93,7 +93,7 @@ class User extends Record{
             $this->lon = $ipInfo->lon;
             $this->lat = $ipInfo->lat;
             $location->lat = $this->lat;
-            $location->lon = $this->lon;  
+            $location->lon = $this->lon;
         }
         $location->create();
         return $this;
@@ -131,6 +131,19 @@ class User extends Record{
             $id = $row[self::PRIMARYKEY];
         }
         return $id;
+    }
+    public static function activeSessions(){
+      $data = array();
+      $results = $GLOBALS['db']
+          ->database(self::DB)
+          ->table(self::TABLE)
+          ->select(self::PRIMARYKEY)
+          ->where("token_expiration",">","NOW()")
+          ->get();
+      while($row = mysqli_fetch_assoc($results)){
+        $data[] = new self($row[self::PRIMARYKEY]);
+      }
+      return $data;
     }
     public static function iterateAttempts($username){
         if(!$id = self::verifyUsername($username)){

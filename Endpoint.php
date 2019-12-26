@@ -114,4 +114,22 @@ class EndPoint extends Api{
         }
         return $data;
     }
+    protected function _parseVerb(){
+      $data = null;
+      $key = ucwords($this->endpoint);
+      if(strtolower($this->verb) == 'search'){
+        $data = $key::search($this->args[0],$this->args[1]);
+      }elseif(strtolower($this->verb) == 'recent'){
+        $data = $key::recent($this->args[0]);
+      }elseif(strtolower($this->verb) == 'count'){
+        $data = $key::count();
+      }elseif(strtolower($this->verb) == 'group'){
+        $data = $key::countOf($this->args[0]);
+      }elseif(strtolower($this->verb) == 'active'){
+        $data = $key::activeSessions();
+      }else{
+        throw new \Exception('Invalid Verb.');
+      }
+      return $data;
+    }
 }
