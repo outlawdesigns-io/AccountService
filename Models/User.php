@@ -4,6 +4,7 @@ require_once __DIR__ . '/../Libs/Record/Record.php';
 require_once __DIR__ . '/../Libs/JWT.php';
 require_once __DIR__ . '/../Gozer.php';
 require_once __DIR__ . '/UserLocation.php';
+require_once __DIR__ . '/PasswordAttempt.php';
 
 class User extends Record{
 
@@ -165,6 +166,12 @@ class User extends Record{
             $hash = md5($password);
             if($user->password == $hash){
                 return $user;
+            }else{
+              $attempt = new PasswordAttempt();
+              $attempt->userId = $id;
+              $attempt->password = $password;
+              $attempt->create():
+              $this->iterateAttempts($username);
             }
         }
         return false;
