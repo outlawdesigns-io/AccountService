@@ -171,7 +171,7 @@ class User extends Record{
               $attempt->userId = $id;
               $attempt->password = $password;
               $attempt->create();
-              $this->iterateAttempts($username);
+              self::iterateAttempts($username);
             }
         }
         return false;
