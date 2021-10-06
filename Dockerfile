@@ -1,4 +1,4 @@
-FROM ulsmith/rpi-raspbian-apache-php
+FROM outlawstar4761/rpi-raspbian-apache-php
 ENV TZ=America/Chicago
 ADD ./ /var/www/html
 RUN chmod -R 0755 /var/www/html
