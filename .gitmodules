@@ -7,3 +7,6 @@
 [submodule "Libs/ContainerSetup"]
 	path = Libs/ContainerSetup
 	url = https://gist.github.com/outlawstar4761/3243b7bcdcd2aa051e85338c403ac0cd
+[submodule "Libs/SSLConf"]
+	path = Libs/SSLConf
+	url = https://gist.github.com/outlawstar4761/f542d92168f78640fbb28f26ead562c3
