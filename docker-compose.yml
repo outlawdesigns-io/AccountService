@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  backend:
+    image: accountservice-php8.2
+    environment:
+      ALLOW_OVERRIDE: true
+      MYSQL_HOST: $DOCKER_MYSQL_HOST
+      MYSQL_USER: $DOCKER_MYSQL_USER
+      MYSQL_PASSWORD: $DOCKER_MYSQL_PASS
+    build:
+      context: $DOCKER_BUILD_DIR/AccountService/
+      dockerfile: $DOCKER_BUILD_DIR/AccountService/Dockerfile
+    ports:
+      - '9661:443'
+    volumes:
+      - $DOCKER_CERT_DIR:/etc/apache2/certs
+      - $DOCKER_SHARED_LOG_DIR:/mnt/LOE/log
